@@ -22,7 +22,11 @@ public class Pedidos implements Serializable {
 
 	@Inject
 	private EntityManager manager;
-
+	
+	public Pedido guardar(Pedido pedido) {
+		return this.manager.merge(pedido); // salva ou atualiza no bd
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Pedido> filtrados(PedidoFilter filtro) {
 		Session session = this.manager.unwrap(Session.class);

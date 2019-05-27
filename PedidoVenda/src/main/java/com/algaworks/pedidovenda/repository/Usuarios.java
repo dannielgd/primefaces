@@ -68,4 +68,10 @@ public class Usuarios implements Serializable {
 		
 	}
 	
+	public List<Usuario> vendedores() {
+		//TODO filtrar apenas vendedores por grupo específico.
+		return this.manager.createQuery("from Usuario", Usuario.class)
+				.getResultList();
+	}
+	
 }

@@ -75,5 +75,12 @@ public class Clientes implements Serializable {
 		return cliente;
 
 	}
+	
+	public List<Cliente> porNome(String nome) {
+		return this.manager.createQuery("from Cliente " +
+				"where upper(nome) like :nome", Cliente.class)
+				.setParameter("nome", nome.toUpperCase() + "%")
+				.getResultList();
+	}
 
 }

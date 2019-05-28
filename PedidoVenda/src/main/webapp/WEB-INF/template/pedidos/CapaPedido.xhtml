@@ -38,21 +38,30 @@
     	</p:selectOneMenu>
     	
     	<p:outputLabel value="Valor do Frete" for="valorFrete" />
-    	<p:inputText id="valorFrete" size="10" maxlength="10" value="#{cadastroPedidoBean.pedido.valorFrete}">
+    	<p:inputText id="valorFrete" size="10" maxlength="10" styleClass="moeda"
+    		value="#{cadastroPedidoBean.pedido.valorFrete}">
     		<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+    		
+    		<p:ajax event="change" process="@this" update="totalPedido"
+    			listener="#{cadastroPedidoBean.recalcularPedido}" />
     	</p:inputText>
     	
     	<p:outputLabel value="Subtotal" style="font-weight: bold" />
-    	<p:outputLabel value="R$ 0,00" style="font-weight: bold" id="subtotal" />
+    	<p:outputLabel value="#{cadastroPedidoBean.pedido.valorSubTotal}" style="font-weight: bold" id="subtotal">
+    		<f:convertNumber type="currency" />
+    	</p:outputLabel>
     	
     	<p:outputLabel value="Valor de Desconto" for="valorDesconto" />
     	<p:inputText id="valorDesconto" size="10" maxlength="10" styleClass="moeda"
     		value="#{cadastroPedidoBean.pedido.valorDesconto}">
     		<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+    		
+    		<p:ajax event="change" process="@this" update="totalPedido"
+    			listener="#{cadastroPedidoBean.recalcularPedido}" />
     	</p:inputText>
     	
     	<p:outputLabel value="Total do Pedido" style="font-weight: bold; font-size: 1.1em" />
-    	<p:outputLabel value=" #{cadastroPedidoBean.pedido.valorTotal}"
+    	<p:outputLabel value="#{cadastroPedidoBean.pedido.valorTotal}"
     		style="font-weight: bold; font-size: 1.1em" id="totalPedido">
     		<f:convertNumber type="currency" />
     	</p:outputLabel>

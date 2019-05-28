@@ -14,6 +14,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.algaworks.pedidovenda.model.Pedido;
+import com.algaworks.pedidovenda.model.Produto;
 import com.algaworks.pedidovenda.repository.filter.PedidoFilter;
 
 public class Pedidos implements Serializable {
@@ -71,6 +72,11 @@ public class Pedidos implements Serializable {
 		}
 		
 		return criteria.addOrder(Order.asc("id")).list();
+	}
+
+	public Pedido porId(Long id) {
+		Pedido pedido = manager.find(Pedido.class, id);
+		return pedido;
 	}
 	
 }

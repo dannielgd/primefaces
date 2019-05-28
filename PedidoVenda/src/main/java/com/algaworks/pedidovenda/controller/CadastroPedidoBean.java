@@ -22,44 +22,55 @@ import com.algaworks.pedidovenda.util.jsf.FacesUtil;
 public class CadastroPedidoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private Usuarios usuarios;
-	
+
 	@Inject
 	private Clientes clientes;
-	
+
 	@Inject
 	CadastroPedidoService cadastroPedidoService;
-	
+
 	private Pedido pedido;
 	private List<Usuario> vendedores;
-	
+
 	public CadastroPedidoBean() {
 		limpar();
 	}
-	
-	public void inicialidar() {
-		if(FacesUtil.isNotPostback()) {
-			this.vendedores = this.usuarios.vendedores();
+
+	public void inicializar() {
+		if (this.pedido == null) {
+			limpar();
 		}
+		if (FacesUtil.isNotPostback()) {
+			this.vendedores = this.usuarios.vendedores();
+			recalcularPedido();
+		}
+
 	}
-	
+
 	private void limpar() {
 		pedido = new Pedido();
 		pedido.setEnderecoEntrega(new EnderecoEntrega());
 	}
-	
+
 	public void salvar() {
 		this.pedido = this.cadastroPedidoService.salvar(this.pedido);
-		
+
 		FacesUtil.addInfoMessage("Pedido Salvo com Sucesso!");
 	}
-	
+
+	public void recalcularPedido() {
+		if (pedido != null) {
+			this.pedido.recalcularValorTotal();
+		}
+	}
+
 	public FormaPagamento[] getFormasPagamento() {
 		return FormaPagamento.values();
 	}
-	
+
 	public List<Cliente> completarCliente(String nome) {
 		return clientes.porNome(nome);
 	}
@@ -68,8 +79,16 @@ public class CadastroPedidoBean implements Serializable {
 		return pedido;
 	}
 
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+
 	public List<Usuario> getVendedores() {
 		return vendedores;
 	}
-	
+
+	public boolean isEditando() {
+		return this.pedido.getId() != null;
+	}
+
 }

@@ -5,6 +5,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.algaworks.pedidovenda.model.Cliente;
 import com.algaworks.pedidovenda.repository.Clientes;
 import com.algaworks.pedidovenda.util.cdi.CDIServiceLocator;
@@ -23,7 +25,7 @@ public class ClienteConverter implements Converter<Cliente> {
 	public Cliente getAsObject(FacesContext context, UIComponent component, String value) {
 		Cliente retorno = null;
 		
-		if(value != null && !value.isBlank()) {
+		if(StringUtils.isNotEmpty(value)) {
 			Long id = Long.valueOf(value);
 			retorno = clientes.porId(id);
 		}

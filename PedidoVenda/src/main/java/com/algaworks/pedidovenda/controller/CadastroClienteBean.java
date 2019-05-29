@@ -20,50 +20,52 @@ import com.algaworks.pedidovenda.util.jsf.FacesUtil;
 public class CadastroClienteBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Cliente cliente;
+
 	private Endereco endereco;
-	private List<Integer> enderecos;
-	
+	private boolean editandoEndereco;
+
 	@Inject
 	private CadastroClienteService cadastroClienteService;
-	
-	public CadastroClienteBean() {
+
+	public void inicializar() {
 		if (cliente == null) {
 			limpar();
 		}
 	}
-	
+
 	public void salvar() {
-		
+
 		try {
 			cadastroClienteService.salvar(cliente);
 			limpar();
-			
+
 			FacesUtil.addInfoMessage("Cliente salvo com sucesso!");
 		} catch (NegocioException e) {
 			FacesUtil.addErrorMessage(e.getMessage());
 		}
 	}
-	
+
 	private void limpar() {
 		cliente = new Cliente();
 		endereco = new Endereco();
-		enderecos = new ArrayList<>();
 	}
-	
-	public void salvarEndereco() {
-		System.out.println("Salvou Endereço!");
+
+	public void limparEndereco() {
+		endereco = new Endereco();
+		this.endereco.setCliente(this.cliente);
+		this.editandoEndereco = false;
 	}
-	
-	public List<Integer> getEnderecos() {
-		return enderecos;
+
+	public void adicionarEndereco() {
+		this.cliente.getEnderecos().add(endereco);
 	}
 
 	public Cliente getCliente() {
 		return cliente;
 	}
-	
+
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
@@ -71,12 +73,16 @@ public class CadastroClienteBean implements Serializable {
 	public Endereco getEndereco() {
 		return endereco;
 	}
-	
+
 	public TipoPessoa[] getTiposCliente() {
 		return TipoPessoa.values();
 	}
-	
+
 	public boolean isEditando() {
-		return cliente.getId() != null;
+		return cliente != null && cliente.getId() != null;
+	}
+
+	public boolean isEditandoEndereco() {
+		return editandoEndereco;
 	}
 }

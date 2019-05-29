@@ -140,4 +140,8 @@ public class Produto implements Serializable {
 		
 	}
 
+	public void adicionarEstoque(Integer quantidade) {
+		this.setQuantidadeEstoque(getQuantidadeEstoque() + quantidade);
+	}
+
 }

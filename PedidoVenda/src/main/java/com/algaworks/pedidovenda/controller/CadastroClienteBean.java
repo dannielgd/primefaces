@@ -79,5 +79,4 @@ public class CadastroClienteBean implements Serializable {
 	public boolean isEditando() {
 		return cliente.getId() != null;
 	}
-	
 }

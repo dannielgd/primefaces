@@ -72,9 +72,16 @@ public class CadastroPedidoBean implements Serializable {
 	}
 
 	public void salvar() {
+		
+		this.pedido.removerItemVazio();
+		
+		try {
 		this.pedido = this.cadastroPedidoService.salvar(this.pedido);
 
 		FacesUtil.addInfoMessage("Pedido Salvo com Sucesso!");
+		} finally {
+			this.pedido.adicionarItemVazio();
+		}
 	}
 
 	public void recalcularPedido() {
@@ -110,9 +117,9 @@ public class CadastroPedidoBean implements Serializable {
 
 	private boolean existeItemComProduto(Produto produto) {
 		boolean existeItem = false;
-		
-		for(ItemPedido item: this.getPedido().getItens()) {
-			if(produto.equals(item.getProduto())) {
+
+		for (ItemPedido item : this.getPedido().getItens()) {
+			if (produto.equals(item.getProduto())) {
 				existeItem = true;
 				break;
 			}
@@ -123,9 +130,9 @@ public class CadastroPedidoBean implements Serializable {
 	public List<Produto> completarProduto(String nome) {
 		return this.produtos.porNome(nome);
 	}
-	
+
 	public void atualizarQuantidade(ItemPedido item, int linha) {
-		if(item.getQuantidade() < 1) {
+		if (item.getQuantidade() < 1) {
 			if (linha == 0) {
 				item.setQuantidade(1);
 			} else {

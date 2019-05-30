@@ -36,11 +36,10 @@ public class EnvioPedidoEmailBean implements Serializable {
 		String filePath = getClass().getClassLoader().getResource("/emails/pedido.template").getFile();
 		
 		message.to(this.pedido.getCliente().getEmail()) .subject("Pedido " + this.pedido.getId())
-//		.bodyHtml(new VelocityTemplate(new File(filePath)))
-		.bodyHtml("<strong>Valor Total</strong> " + pedido.getValorTotal())
-//		.put("pedido", this.pedido)
-//		.put("numberTool", new NumberTool())
-//		.put("locale", new Locale("pt", "BR"))
+		.bodyHtml(new VelocityTemplate(new File(filePath)))
+		.put("pedido", this.pedido)
+		.put("numberTool", new NumberTool())
+		.put("locale", new Locale("pt", "BR"))
 		.send();
 		
 		FacesUtil.addInfoMessage("Pedido enviado por email com sucesso!");

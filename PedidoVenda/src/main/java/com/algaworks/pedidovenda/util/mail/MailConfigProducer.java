@@ -6,8 +6,6 @@ import java.util.Properties;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 
-import org.apache.commons.mail.DefaultAuthenticator;
-
 import com.outjected.email.api.SessionConfig;
 import com.outjected.email.impl.SimpleMailConfig;
 

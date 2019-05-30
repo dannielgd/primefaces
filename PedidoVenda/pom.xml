@@ -120,13 +120,25 @@
 			<artifactId>mail</artifactId>
 			<version>1.4.7</version>
 		</dependency>
-		
+
+		<!-- <dependency> <groupId>org.apache.commons</groupId> <artifactId>commons-email</artifactId> 
+			<version>1.4</version> </dependency> -->
+
+		<!-- Usamos para templates de emails -->
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-email</artifactId>
-			<version>1.4</version>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.7</version>
+			<scope>compile</scope>
 		</dependency>
 
+		<!-- Usamos para formatar números em templates de emails -->
+		<dependency>
+			<groupId>velocity-tools</groupId>
+			<artifactId>velocity-tools-generic</artifactId>
+			<version>1.4</version>
+			<scope>compile</scope>
+		</dependency>
 
 		<!-- API de Servlet -->
 		<dependency>
@@ -137,6 +149,14 @@
 		</dependency>
 
 	</dependencies>
+	<repositories>
+		<repository>
+			<id>clearfly-releases</id>
+			<name>Clearfly Releases Maven Repository</name>
+			<url>https://mvn.clearfly.net/artifactory/libs-release</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
 	<build>
 		<finalName>PedidoVenda</finalName>
 		<plugins>

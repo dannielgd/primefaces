@@ -3,15 +3,12 @@ package com.algaworks.pedidovenda.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Locale;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.velocity.tools.generic.NumberTool;
-
-import com.algaworks.pedidovenda.model.Pedido;
+import com.algaworks.pedidovenda.model.Cliente;
 import com.algaworks.pedidovenda.util.jsf.FacesUtil;
 import com.algaworks.pedidovenda.util.mail.Mailer;
 import com.outjected.email.api.MailMessage;
@@ -19,7 +16,7 @@ import com.outjected.email.impl.templating.velocity.VelocityTemplate;
 
 @Named
 @RequestScoped
-public class EnvioPedidoEmailBean implements Serializable {
+public class EnvioClienteEmailBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -27,22 +24,21 @@ public class EnvioPedidoEmailBean implements Serializable {
 	private Mailer mailer;
 	
 	@Inject
-	@PedidoEdicao
-	Pedido pedido;
-	public void enviarPedido() throws IOException {
+	@ClienteEdicao
+	Cliente cliente;
+	
+	public void enviarCliente() throws IOException {
 		
 		MailMessage message = mailer.novaMensagem();
 		
-		String filePath = getClass().getClassLoader().getResource("emails/pedido.template").getFile();
+		String filePath = getClass().getClassLoader().getResource("emails/cliente.template").getFile();
 		
-		message.to(this.pedido.getCliente().getEmail()) .subject("Pedido " + this.pedido.getId())
+		message.to(this.cliente.getEmail()).subject("Cliente " + this.cliente.getNome())
 		.bodyHtml(new VelocityTemplate(new File(filePath)))
-		.put("pedido", this.pedido)
-		.put("numberTool", new NumberTool())
-		.put("locale", new Locale("pt", "BR"))
+		.put("cliente", this.cliente)
 		.send();
 		
-		FacesUtil.addInfoMessage("Pedido enviado por email com sucesso!");
+		FacesUtil.addInfoMessage("Dados do Cliente enviados por email com sucesso!");
 		 
 //		Email email = new SimpleEmail();
 //		email.setHostName("smtp.gmail.com");

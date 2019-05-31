@@ -89,13 +89,13 @@
 				<p:panelGrid id="panelGrupo" columns="2" columnClasses="rotulo, campo">
 					<p:outputLabel value="Nome" for="nomeGrupo" />
 					<p:inputText id="nomeGrupo" size="100"
-						value="#{cadastroUsuarioBean.grupo.nome}" />
+						value="#{cadastroUsuarioBean.grupo.nome}" onkeypress="if (event.keyCode == 13) { document.getElementById('frm:incluirGrupo').click(); return false; }" />
 	
 					<p:outputLabel value="Descrição" for="descricao" />
 					<p:inputText id="descricao" size="100"
-						value="#{cadastroUsuarioBean.grupo.descricao}" />
+						value="#{cadastroUsuarioBean.grupo.descricao}" onkeypress="if (event.keyCode == 13) { document.getElementById('frm:incluirGrupo').click(); return false; }" />
 					<h:panelGroup></h:panelGroup>
-					<p:commandButton value="Incluir"
+					<p:commandButton value="Incluir" id="incluirGrupo"
 								action="#{cadastroUsuarioBean.salvarGrupo}"
 								update="gruposUsuariosTable panelGrupo grupoMensagem"
 								process="panelGrupo"

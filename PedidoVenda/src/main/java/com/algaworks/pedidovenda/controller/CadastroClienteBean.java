@@ -1,9 +1,8 @@
 package com.algaworks.pedidovenda.controller;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
+import javax.enterprise.inject.Produces;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -20,7 +19,9 @@ import com.algaworks.pedidovenda.util.jsf.FacesUtil;
 public class CadastroClienteBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	@Produces
+	@ClienteEdicao
 	private Cliente cliente;
 
 	private Endereco endereco;
@@ -49,17 +50,18 @@ public class CadastroClienteBean implements Serializable {
 
 	private void limpar() {
 		cliente = new Cliente();
-		endereco = new Endereco();
+		limparEndereco();
 	}
 
 	public void limparEndereco() {
 		endereco = new Endereco();
-		this.endereco.setCliente(this.cliente);
 		this.editandoEndereco = false;
 	}
 
 	public void adicionarEndereco() {
 		this.cliente.getEnderecos().add(endereco);
+		this.endereco.setCliente(this.cliente);
+		limparEndereco();
 	}
 
 	public Cliente getCliente() {

@@ -141,24 +141,24 @@
 		</dependency>
 		
 		<!-- Spring Security (autenticação e autorização) -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
-			<version>5.1.5.RELEASE</version>
+			<version>3.1.4.RELEASE</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>5.1.5.RELEASE</version>
+			<version>3.1.4.RELEASE</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>5.1.5.RELEASE</version>
-		</dependency> -->
-
+			<version>3.1.4.RELEASE</version>
+		</dependency>
+		
 		<!-- API de Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>

@@ -11,11 +11,15 @@
     <http pattern="/Erro.xhtml" security="none" />
     <http pattern="/javax.faces.resource/**" security="none" />
     
-	<http auto-config="true" use-expressions="true">
+	<http auto-config="false" use-expressions="true">
 		<intercept-url pattern="/Home.xhtml" access="isAuthenticated()" />
 		<intercept-url pattern="/pedidos/**" access="hasAnyRole('VENDEDORES', 'AUXILIARES', 'ADMINISTRADORES')" />
 		<intercept-url pattern="/produtos/**" access="hasAnyRole('ADMINISTRADORES')" />
 		<intercept-url pattern="/**" access="denyAll" />
+		
+		<form-login login-page="/Login.xhtml" authentication-failure-url="/Login.xhtml?invalid=true"
+				default-target-url="/" always-use-default-target="true" />
+		<logout logout-url="/j_spring_security_logout" invalidate-session="true" />
 	</http>
 	
 	<authentication-manager>

@@ -23,7 +23,8 @@
 				<p:button value="Novo" outcome="/clientes/CadastroCliente" />
 				<p:commandButton value="Salvar" id="botaoSalvar" 
 					action="#{cadastroClienteBean.salvar}"
-					process="@this painel" update="clienteMensagem painel enderecosClienteTable" />
+					process="@this painel" update="clienteMensagem painel enderecosClienteTable"
+					disabled="#{not seguranca.salvarClientePermitido}" />
 			</p:toolbarGroup>
 			<p:toolbarGroup align="right">
 				<p:commandButton value="Enviar cadastro por email" action="#{envioClienteEmailBean.enviarCliente}"

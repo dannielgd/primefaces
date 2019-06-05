@@ -51,4 +51,13 @@ public class Seguranca {
 				|| externalContext.isUserInRole("VENDEDORES");
 	}
 	
+	public boolean isSalvarClientePermitido() {
+		return externalContext.isUserInRole("ADMINISTRADORES") 
+				|| externalContext.isUserInRole("VENDEDORES");
+	}
+	
+	public boolean isExcluirClientePermitido() {
+		return externalContext.isUserInRole("ADMINISTRADORES") 
+				|| externalContext.isUserInRole("VENDEDORES");
+	}
 }

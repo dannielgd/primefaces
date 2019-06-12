@@ -80,6 +80,9 @@ public class Usuarios implements Serializable {
 					.setParameter("email", email.toLowerCase()).getSingleResult();
 		} catch (NoResultException e) {
 			// nenhum usuário encontrado com o e-mail informado
+			System.out.println("Deu um NoResultException");
+		} catch (Exception e) {
+			System.out.println("Eu peguei a exceção:" + e.getMessage());
 		}
 
 		return usuario;

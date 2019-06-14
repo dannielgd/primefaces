@@ -13,8 +13,6 @@
 	
 	<ui:define name="corpo">
 		
-		<p:chart type="line" model="#{graficoPedidosCriadosBean.model}" style="height: 400px;" />
-		
 		<p:button value="Cadastro de Produto" outcome="/produtos/CadastroProduto" />
 		<p:button value="Pesquisa de Produtos" outcome="/produtos/PesquisaProdutos" />
 		<br /><br />
@@ -29,5 +27,11 @@
 		
 		<p:button value="Cadastro de Usuário" outcome="/usuarios/CadastroUsuario" />
 		<p:button value="Pesquisa de Usuários" outcome="/usuarios/PesquisaUsuarios" />
+		<br /><br />
+		
+		<p:chart type="line" model="#{graficoPedidosCriadosBean.model}" style="height: 400px;" />
+		
+		<br /> <br />
+		<p:chart type="pie" model="#{graficoPedidosCriadosBean.modelPizza}" style="height:400px" />
 	</ui:define>
 </ui:composition>

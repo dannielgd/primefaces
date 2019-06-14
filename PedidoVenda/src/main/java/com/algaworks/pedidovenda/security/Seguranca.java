@@ -1,6 +1,7 @@
 package com.algaworks.pedidovenda.security;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Produces;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -27,8 +28,10 @@ public class Seguranca {
 		return nome;
 
 	}
-
-	private UsuarioSistema getUsuarioLogado() {
+	
+	@Produces
+	@UsuarioLogado
+	public UsuarioSistema getUsuarioLogado() {
 		UsuarioSistema usuario = null;
 		
 		UsernamePasswordAuthenticationToken auth = (UsernamePasswordAuthenticationToken)

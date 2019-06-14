@@ -2,6 +2,7 @@ package com.algaworks.pedidovenda.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,7 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -30,6 +34,8 @@ public class Usuario implements Serializable {
 	private String email;
 	
 	private String senha;
+	
+	private Date dataCriacao;
 	
 	private List<Grupo> grupos = new ArrayList<>();
 	
@@ -74,6 +80,17 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 	
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name ="data_criacao", nullable = false)
+	public Date getDataCriacao() {
+		return dataCriacao;
+	}
+	
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "usuario_id"),
 				inverseJoinColumns = @JoinColumn(name = "grupo_id"))
